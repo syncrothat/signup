@@ -71,7 +71,6 @@
             align-items: center;
             justify-content: center;
             min-height: calc(100vh - 80px);
-            text-align: center;
             padding: 1.5rem;
         }
         
@@ -95,112 +94,71 @@
         h4 {
             font-size: medium;
         }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        .fade-out {
+            animation: fadeOut 0.5s;
+            opacity: 0;
+        }
+
+        /* Fade in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s;
+            opacity: 1;
+        }
     </style>
 </head>
 
 <body class="dark">
     <main class="main-content">
-        <div class="">
-            <header class="medium no-padding left-align">
-                <h1>Maintainership form</h1>
-            </header>
+        <div id="stepone">
+            <div class="">
+                <header class="medium no-padding left-align">
+                    <h1>Login</h1>
+                </header>
+    
+                <form>
+                    <div class="field label round fill">
+                        <input id="username" type="text">
+                        <label>Username</label>
+                    </div>
+                    <button id="sumbitone" class="responsive">Request OTP</button>
+                </form>
+            </div>    
+        </div>
 
-            <!-- Maintainership Form -->
-            <form>
-                <!-- Maintainer information - Start -->
-                <h4 class="secondary-text">Maintainer Information</h4>
-                <div class="grid left">
-                    <div class="s6">
-                        <div class="field label round fill">
-                            <input type="text">
-                            <label>Name</label>
-                        </div>
+        <div id="steptwo" hidden>
+            <div class="">
+                <header class="medium no-padding left-align">
+                    <h1>Insert OTP</h1>
+                </header>
+    
+                <h4 class="secondary-text">OTP Code been sent to your Telegram!</h4>
+                <form>
+                    <div class="field label round fill">
+                        <input id="passkey" type="text">
+                        <label>Username</label>
                     </div>
-                    <div class="s6">
-                        <div class="field label round fill">
-                            <input type="text">
-                            <label>Username</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid small-space">
-                    <div class="s6">
-                        <div class="field label round fill">
-                            <input type="text">
-                            <label>E-Mail</label>
-                        </div>
-                    </div>
-                    <div class="s6">
-                        <div class="field label round fill">
-                            <input type="text">
-                            <label>Telegram</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid small-space">
-                    <div class="s6">
-                        <div class="field label round fill">
-                            <input type="text">
-                            <label>GitHub</label>
-                        </div>
-                    </div>
-                    <div class="s6">
-                        <div class="field label round fill">
-                            <input type="text">
-                            <label>GitLab</label>
-                        </div>
-                    </div>
-                </div>
-                <!-- Maintainer information - End -->
-
-                <!-- Device information - Start -->
-                <h4 class="secondary-text">Device Information</h4>
-                <div class="field label round fill">
-                    <input type="text">
-                    <label>Brand</label>
-                </div>
-                <div class="grid small-space">
-                    <div class="s6">
-                        <div class="field label round fill">
-                            <input type="text">
-                            <label>Model/Market Name</label>
-                        </div>
-                    </div>
-                    <div class="s6">
-                        <div class="field label round fill">
-                            <input type="text">
-                            <label>Codename</label>
-                        </div>
-                    </div>
-                </div>
-                <!-- Device information - End -->
-
-                <!-- Source Code information - Start -->
-                <h4 class="secondary-text">Device Information</h4>
-                <div class="field label round fill">
-                    <input type="url">
-                    <label>Device Tree</label>
-                </div>
-                <div class="field label round fill">
-                    <input type="url">
-                    <label>Common Device Tree</label>
-                    <span class="helper">If available</span>
-                </div>
-                <div class="field label round fill">
-                    <input type="url">
-                    <label>Kernel</label>
-                </div>
-                <div class="field label round fill">
-                    <input type="url">
-                    <label>Vendor Tree</label>
-                </div>
-                <div class="field label round fill">
-                    <input type="url">
-                    <label>Common Vendor Tree</label>
-                    <span class="helper">If available</span>
-                </div>
-                <!-- Source Code information - End -->
-            </form>
+                    <button id="sumbittwo" class="responsive">Log In</button>
+                </form>
+            </div>    
         </div>
     </main>
 
@@ -216,6 +174,9 @@
             </div>
         </div>
     </footer>
+
+    <script src="ui.js"></script>
+
 </body>
 
 </html>
