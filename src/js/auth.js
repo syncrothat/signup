@@ -1,6 +1,6 @@
 import { authURL } from "./config/url.js";
 
-document.getElementById('sumbitone').addEventListener('click', function(event) {
+document.getElementById('submitone').addEventListener('click', function(event) {
     event.preventDefault();
 
     const username = document.getElementById('username').value;
@@ -20,7 +20,7 @@ document.getElementById('sumbitone').addEventListener('click', function(event) {
     }, 500);
 });
 
-document.getElementById('sumbittwo').addEventListener('click', function(event) {
+document.getElementById('submittwo').addEventListener('click', function(event) {
     event.preventDefault();
 
     const username = document.getElementById('username').value;
