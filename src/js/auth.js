@@ -1,4 +1,4 @@
-import { authURL } from "./config/url.js";
+import { authURL, reqpassURL } from "./config/url.js";
 
 document.getElementById('submitone').addEventListener('click', function(event) {
     event.preventDefault();
@@ -18,6 +18,30 @@ document.getElementById('submitone').addEventListener('click', function(event) {
 
         document.getElementById('steptwo').classList.add('fade-in');
     }, 500);
+
+    const url = `${reqpassURL}/${username}`;
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: username })
+    })
+    .then(response => {
+        if (!response.ok) {
+            console.error('Response error:', response.status, response.statusText);
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Passkey request response data:', data);
+        // Handle response data as needed
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Passkey request failed!');
+    });
 });
 
 document.getElementById('submittwo').addEventListener('click', function(event) {

@@ -1,1 +1,2 @@
-export let authURL = "http://127.0.0.1:1111/api/auth";
+export let authURL = "https://canna.hlcyn.co/api/auth";
+export let reqpassURL = "https://canna.hlcyn.co/api/passkey/";
