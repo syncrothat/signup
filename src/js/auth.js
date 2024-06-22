@@ -1,5 +1,16 @@
 import { authURL, reqpassURL } from "./config/url.js";
 
+// Function to handle the fade-in effect on page load
+function fadeInStepOne() {
+    document.getElementById('stepone').hidden = false;
+    document.getElementById('stepone').classList.add('fade-in');
+}
+
+// Add event listener for DOMContentLoaded to trigger the fade-in
+window.addEventListener('DOMContentLoaded', function() {
+    fadeInStepOne();
+});
+
 document.getElementById('submitone').addEventListener('click', function(event) {
     event.preventDefault();
 
@@ -79,16 +90,12 @@ document.getElementById('submittwo').addEventListener('click', function(event) {
     })
     .then(data => {
         console.log('Response data:', data);
-
+    
         if (data.message === "Login successful" && data.token) {
             document.cookie = `token=${data.token}; path=/; secure`;
-            alert('Login successful!');
+            window.location.href = 'https://scipio.hlcyn.co/issues';
         } else {
             alert('Login failed: ' + (data.message || 'Unknown error'));
         }
     })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Login failed!');
-    });
 });
