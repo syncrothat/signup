@@ -1,12 +1,10 @@
-import { authURL, reqpassURL } from "./config/url.js";
+import { authURL } from "./config/url.js";
 
-// Function to handle the fade-in effect on page load
 function fadeInStepOne() {
     document.getElementById('stepone').hidden = false;
     document.getElementById('stepone').classList.add('fade-in');
 }
 
-// Add event listener for DOMContentLoaded to trigger the fade-in
 window.addEventListener('DOMContentLoaded', function() {
     fadeInStepOne();
 });
@@ -29,49 +27,18 @@ document.getElementById('submitone').addEventListener('click', function(event) {
 
         document.getElementById('steptwo').classList.add('fade-in');
     }, 500);
-
-    const url = `${reqpassURL}/${username}`;
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username: username })
-    })
-    .then(response => {
-        if (!response.ok) {
-            console.error('Response error:', response.status, response.statusText);
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Passkey request response data:', data);
-        // Handle response data as needed
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Passkey request failed!');
-    });
 });
 
 document.getElementById('submittwo').addEventListener('click', function(event) {
     event.preventDefault();
 
     const username = document.getElementById('username').value;
-    const passkey = parseInt(document.getElementById('passkey').value);
-
-    if (isNaN(passkey)) {
-        alert("Please enter a valid passkey.");
-        return;
-    }
+    const passkey = document.getElementById('passkey').value;
 
     const payload = {
         username: username,
-        passkey: passkey
+        password: passkey
     };
-
-    console.log('Sending payload:', payload);
 
     fetch(authURL, {
         method: 'POST',
@@ -91,9 +58,9 @@ document.getElementById('submittwo').addEventListener('click', function(event) {
     .then(data => {
         console.log('Response data:', data);
     
-        if (data.message === "Login successful" && data.token) {
+        if (data.token) {
             document.cookie = `token=${data.token}; path=/; secure`;
-            window.location.href = 'https://scipio.hlcyn.co/issues';
+            window.location.href = './done.html';
         } else {
             alert('Login failed: ' + (data.message || 'Unknown error'));
         }
