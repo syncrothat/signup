@@ -60,7 +60,7 @@ document.getElementById('submittwo').addEventListener('click', function(event) {
     
         if (data.token) {
             document.cookie = `token=${data.token}; path=/; secure`;
-            window.location.href = './done.html';
+            window.location.href = 'https://syncroapp.github.io/Desk';
         } else {
             alert('Login failed: ' + (data.message || 'Unknown error'));
         }
