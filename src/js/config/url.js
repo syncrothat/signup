@@ -1,1 +1,1 @@
-export let authURL = "https://api.sync.buxxed.me/api/accounts/auth";
+export let authURL = "https://api.sync2.buxxed.me/api/accounts/auth";
