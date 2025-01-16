@@ -59,10 +59,14 @@ document.getElementById('submittwo').addEventListener('click', function(event) {
         console.log('Response data:', data);
     
         if (data.token) {
-            document.cookie = `token=${data.token}; path=/; secure`;
+            localStorage.setItem('iss_token', data.token);
             window.location.href = 'https://syncroapp.github.io/Desk';
         } else {
             alert('Login failed: ' + (data.message || 'Unknown error'));
         }
     })
+    .catch(error => {
+        console.error('Fetch error:', error);
+        alert('An error occurred while trying to log in.');
+    });
 });
