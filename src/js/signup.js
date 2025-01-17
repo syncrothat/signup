@@ -1,4 +1,4 @@
-import { authURL } from "./config/url.js";
+import { signupURL } from "./config/url.js";
 
 function fadeInStepOne() {
     document.getElementById('stepone').hidden = false;
@@ -34,13 +34,25 @@ document.getElementById('submittwo').addEventListener('click', function(event) {
 
     const username = document.getElementById('username').value;
     const passkey = document.getElementById('passkey').value;
+    const passkeyConfirm = document.getElementById('passkey-confirm').value;
+
+    // Password verification
+    if (passkey !== passkeyConfirm) {
+        alert("Passwords do not match. Please try again.");
+        return;
+    }
+
+    if (!verifyPassword(passkey)) {
+        alert("Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
+        return;
+    }
 
     const payload = {
         username: username,
         password: passkey
     };
 
-    fetch(authURL, {
+    fetch(signupURL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -56,13 +68,8 @@ document.getElementById('submittwo').addEventListener('click', function(event) {
         return response.json();
     })
     .then(data => {
-        console.log('Response data:', data);
-    
-        if (data.token) {
-            localStorage.setItem('iss_token', data.token);
-            window.location.href = 'https://syncroapp.github.io/Desk';
-        } else {
-            alert('Login failed: ' + (data.message || 'Unknown error'));
+        if (data) {
+            window.location.href = 'https://syncroapp.github.io/login';
         }
     })
     .catch(error => {
@@ -70,3 +77,13 @@ document.getElementById('submittwo').addEventListener('click', function(event) {
         alert('An error occurred while trying to log in.');
     });
 });
+
+function verifyPassword(password) {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar;
+}
