@@ -69,7 +69,7 @@ document.getElementById('submittwo').addEventListener('click', function(event) {
     })
     .then(data => {
         if (data) {
-            window.location.href = 'https://syncroapp.github.io/login';
+            window.location.href = 'https://syncro.herobuxx.me/login';
         }
     })
     .catch(error => {
