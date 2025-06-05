@@ -1,1 +1,1 @@
-export let signupURL = "https://apisync.herobuxx.me/api/accounts";
+export let signupURL = "https://syncapi.herobuxx.me/api/accounts";
